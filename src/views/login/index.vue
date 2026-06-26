@@ -34,20 +34,14 @@
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { logLogin } from '@/utils/logger'
 
-// 登录成功时
-logLogin(form.username, 'success')
-
-// 登录失败时
-logLogin(form.username, 'failed')
-
+// ===== 先定义所有数据（顺序很重要）=====
 const router = useRouter()
 const form = reactive({ username: '', password: '', captcha: '' })
 const loading = ref(false)
 const captchaText = ref('')
 
-// 生成随机验证码
+// ===== 再定义函数 =====
 const generateCaptcha = () => {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
   let result = ''
@@ -58,7 +52,6 @@ const generateCaptcha = () => {
 }
 
 const handleLogin = () => {
-  // 验证验证码
   if (form.captcha.toUpperCase() !== captchaText.value.toUpperCase()) {
     ElMessage.error('验证码错误')
     generateCaptcha()
@@ -88,7 +81,6 @@ const handleLogin = () => {
   }, 500)
 }
 
-// 页面加载时生成验证码
 onMounted(() => {
   generateCaptcha()
 })

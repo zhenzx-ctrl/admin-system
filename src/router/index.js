@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
+// 改成 hash 模式
 import Layout from '../layouts/index.vue'
 import Login from '../views/login/index.vue'
 import Dashboard from '../views/dashboard/index.vue'
@@ -31,7 +32,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 })
 

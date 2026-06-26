@@ -183,7 +183,6 @@ const handleBatchDelete = () => {
     mockUsers.value = mockUsers.value.filter(item => !selectedIds.value.includes(item.id))
     selectedIds.value = []
     saveUsers()
-    logOperation('批量删除用户', '用户管理', `删除 ${selectedIds.value.length} 个用户`)
     ElMessage.success('删除成功')
     fetchData()
   }).catch(() => {})
@@ -239,7 +238,6 @@ const handleSubmit = () => {
         updateData.password = formData.password
       }
       mockUsers.value[index] = { ...mockUsers.value[index], ...updateData }
-      logOperation('编辑用户', '用户管理', `用户名：${formData.username}`)
     }
   } else {
     const maxId = mockUsers.value.reduce((max, item) => Math.max(max, item.id), 0)
@@ -251,7 +249,6 @@ const handleSubmit = () => {
       role: formData.role,
       status: formData.status
     })
-    logOperation('新增用户', '用户管理', `用户名：${formData.username}`)
   }
   saveUsers()
   ElMessage.success('保存成功')
@@ -264,7 +261,6 @@ const handleDelete = (id) => {
   ElMessageBox.confirm('确定删除吗？', '提示').then(() => {
     mockUsers.value = mockUsers.value.filter(item => item.id !== id)
     saveUsers()
-    logOperation('删除用户', '用户管理', `用户ID：${id}`)
     ElMessage.success('删除成功')
     fetchData()
   }).catch(() => {})
