@@ -6,10 +6,14 @@ export default defineConfig({
   plugins: [vue()],
   base: './',
   build: {
-    minify: false,  // ← 禁用压缩，方便调试
+    target: 'esnext',
+    minify: 'esbuild',
     rollupOptions: {
       output: {
-        manualChunks: undefined
+        manualChunks: {
+          'element-plus': ['element-plus'],
+          'echarts': ['echarts']
+        }
       }
     }
   },
