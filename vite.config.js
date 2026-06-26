@@ -10,9 +10,16 @@ export default defineConfig({
     minify: 'esbuild',
     rollupOptions: {
       output: {
-        manualChunks: {
-          'element-plus': ['element-plus'],
-          'echarts': ['echarts']
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('element-plus')) {
+              return 'element-plus'
+            }
+            if (id.includes('echarts')) {
+              return 'echarts'
+            }
+            return 'vendor'
+          }
         }
       }
     }
